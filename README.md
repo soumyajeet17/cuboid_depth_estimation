@@ -152,5 +152,4 @@ This would make the 3D reconstruction and all subsequent calculations (especiall
 This project was developed with the assistance of AI, primarily used for:
 * **Refactoring:** Converting the initial standalone Python script into a robust, parameter-driven ROS 2 node.
 * **Debugging:** Systematically diagnosing ROS 2 errors, including launch file syntax, parameter loading, and RVIZ visualization issues.
-* **Best Practices:** Implementing clean Python code with type hinting, docstrings, and proper shutdown hooks.
 * **Documentation:** Generating the structure and content for this `README.md` file.
