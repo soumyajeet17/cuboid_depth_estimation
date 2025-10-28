@@ -47,24 +47,32 @@ This project is built around a single, powerful ROS 2 node, `DepthProcessorNode`
 
 ### 5.1. 3D Reconstruction (Un-projection)
 The 2D depth image (a grid of pixels) is "un-projected" into a 3D point cloud. This is achieved by applying the inverse pinhole camera model to each pixel $(u, v)$ using its known depth value $Z$:
+
 $$
 X = (u - c_x) \cdot \frac{Z}{f_x}
 $$
+
 $$
 Y = (v - c_y) \cdot \frac{Z}{f_y}
 $$
 
-**Critical Assumption:** Since the camera's intrinsic matrix ($K$) was not provided, this project **assumes a standard intrinsic matrix** (fx, fy, cx, cy) based on a typical 640x480 camera. These values are set as parameters in `config/params.yaml`.
+**Critical Assumption:** Since the camera's intrinsic matrix ($K$) was not provided, this project **assumes a standard intrinsic matrix** ($f_x, f_y, c_x, c_y$) based on a typical 640x480 camera. These values are set as parameters in `config/params.yaml`.
+
+---
+
 
 ### 5.2. Plane Fitting: RANSAC
 The **Random Sample Consensus (RANSAC)** algorithm is used to find the dominant plane in the 3D point cloud. This method is highly robust to noise and outliers (e.g., points that aren't part of the cuboid). We use the `open3d.segment_plane()` function, which identifies the set of "inlier" points that best fit a plane model ($Ax + By + Cz + D = 0$). This plane corresponds to the largest visible face of the cuboid.
 
+---
+
+
 ### 5.3. Property Estimation
-* **Normal Angle:** The coefficients of the RANSAC plane model give the face's normal vector $\mathbf{n}_{\text{face}} = [A, B, C]^T$. This is compared to the camera's viewing vector (assumed to be $\mathbf{n}_{\text{cam}} = [0, 0, 1]^T$) using the dot product to find the angle $\theta$.
+* **Normal Angle:** The coefficients of the RANSAC plane model give the face's normal vector **n_face** = `[A, B, C]`<sup>T</sup>. This is compared to the camera's viewing vector (assumed to be **n_cam** = `[0, 0, 1]`<sup>T</sup>) using the dot product to find the angle $\theta$.
 * **Visible Area:** The 3D inlier points are isolated, and an **Oriented Bounding Box (OBB)** is fitted to them. The area is calculated by multiplying the two largest dimensions of this box.
 * **Axis of Rotation:** The axis is defined by a point and a vector.
     * **Point:** The centroid of the cuboid is calculated for every frame. The final "point on the axis" is the average of all these centroids.
-    * **Vector:** Based on the assignment's diagrams, the rotation is assumed to be vertical, so the direction vector is hard-coded as $[0, 1, 0]^T$.
+    * **Vector:** Based on the assignment's diagrams, the rotation is assumed to be vertical, so the direction vector is hard-coded as `[0, 1, 0]`<sup>T</sup>.
 
 ---
 
