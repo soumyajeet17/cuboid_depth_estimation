@@ -29,7 +29,7 @@ This project is a complete ROS 2 implementation of a 3D perception pipeline. The
 ## 4. System Architecture
 This project is built around a single, powerful ROS 2 node, `DepthProcessorNode`. This node acts as the central hub for all perception logic, subscribing to raw data, processing it, and publishing results. This centralized design is ideal for a single, focused perception task.
 
-![System Architecture Diagram](diagram.png)
+![System Architecture Diagram](Diagram.png)
 
 ### ROS 2 Interface
 * **Subscribed Topics:**
