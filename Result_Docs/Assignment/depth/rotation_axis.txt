@@ -1,0 +1,10 @@
+Task 2 Result: Axis of Rotation
+==================================================
+Axis of Rotation Vector (Direction) [X, Y, Z]:
+[0. 1. 0.]
+
+Point on the Axis (Average Centroid) [X, Y, Z]:
+[ 0.0976 -0.0258  1.1951]
+
+Note: Direction vector [0, 1, 0] is assumed based on the
+problem diagram (Top View) showing vertical rotation.

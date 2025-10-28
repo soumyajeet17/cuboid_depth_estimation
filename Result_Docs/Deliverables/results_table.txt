@@ -1,0 +1,10 @@
+Task 1 Results: Normal Angle and Visible Area
+==================================================
+ Image Number  Estimated Normal Angle (deg)  Visible Area (m^2)
+            1                        125.85              2.4188
+            2                        149.79              1.1631
+            3                        130.94              2.2229
+            4                        131.18              2.1985
+            5                        115.32              6.1289
+            6                        165.59              1.7276
+            7                        145.86              1.8955
